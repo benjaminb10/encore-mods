@@ -59,6 +59,17 @@ export function parseSuggestions(answer, heading = headingRe) {
   return ok ? tail.map(clean).filter(Boolean).slice(0, MAX) : []
 }
 
+// The text to insert at the cursor: a space first when the character before the cursor isn't one.
+async function joinAtCursor($, s) {
+  try {
+    const box = await $.prompt.read()
+    const before = (box.text || '').slice(0, box.cursor ?? (box.text || '').length)
+    return before && !/\s$/.test(before) ? ' ' + s : s
+  } catch {
+    return s
+  }
+}
+
 export function register(on, options = {}) {
   headingRe = buildHeading(options.heading || '')
 
@@ -111,7 +122,9 @@ export function register(on, options = {}) {
             pressed = i
             $.ui.invalidate('ui.render')
             $.clock.after(1200, () => { pressed = -1; $.ui.invalidate('ui.render') })
-            await $.prompt.fill({ text: s })
+            // Insert at the cursor instead of replacing the draft, with a space if needed, so
+            // several follow-ups (and your own words between them) add up in the prompt box.
+            await $.prompt.fill({ text: await joinAtCursor($, s), mode: 'insert' })
           },
         }),
       )
