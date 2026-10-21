@@ -23,7 +23,8 @@ test('choices that end a reply after a question', async () => {
 test('a heading quoted mid-sentence or a list mid-reply is ignored', async () => {
   const a = '| mod | It recognises "Next steps" |\n\n- **Checked:**\n  - 19 tests\n- Nothing personal\n\nMake it public?\n\n- Yes\n- Wait\n'
   expect(parseSuggestions(a)).toEqual(['Yes', 'Wait'])
-  expect(parseSuggestions('**Next steps:**\n1. A\n2. B\n\nSources: x')).toEqual([])
+  expect(parseSuggestions('**Next steps:**\n1. A\n2. B\n\nSee you.')).toEqual([])
+  expect(parseSuggestions('**Next steps:**\n1. A\n2. B\n\nSources:\n- [Docs](https://x.dev/d)\n- https://x.dev/e\n')).toEqual(['A', 'B'])
   expect(parseSuggestions('Next steps:\n\n1. A\n\n2. B\n')).toEqual(['A', 'B'])
 })
 

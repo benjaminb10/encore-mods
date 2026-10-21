@@ -31,13 +31,22 @@ function clean(s) {
 }
 
 // A top-level list item (not an indented sub-item)
+const SOURCES = /^[\s#>*_]*(sources|références|references|refs)[\s*_]*:?[\s*_]*$/i
 const ITEM = /^ {0,1}(?:\d+[.)]|[-*•])\s+(.+?)\s*$/
 
 // The follow-ups: the list that ends the reply, right after a "Next steps" heading or a question
 // ("Which one? - A - B"). Nothing may come after it, so a list in the middle of a reply never counts.
 export function parseSuggestions(answer, heading = headingRe) {
   if (!answer) return []
-  const lines = answer.replace(/\r/g, '').split('\n')
+  let lines = answer.replace(/\r/g, '').split('\n')
+  // A trailing "Sources:" block (links after a web search) doesn't hide the follow-ups above it
+  for (let k = lines.length - 1; k >= 0; k--) {
+    if (SOURCES.test(lines[k])) {
+      const rest = lines.slice(k + 1).filter((l) => l.trim())
+      if (rest.length && rest.every((l) => /^\s*(?:[-*•]|\d+[.)])?\s*\[?[^\n]*\]?\(?https?:\/\//.test(l) || /https?:\/\//.test(l))) lines = lines.slice(0, k)
+      break
+    }
+  }
   let i = lines.length - 1
   const tail = []
   while (i >= 0 && (ITEM.test(lines[i]) || !lines[i].trim())) {
