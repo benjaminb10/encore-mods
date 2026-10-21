@@ -4,7 +4,7 @@
 const MAX = 4
 const URL_RE = /https?:\/\/[^\s"'<>)\]`*|\\]+/g
 const LOCAL = /^https?:\/\/(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\])(:\d+)?/
-const DEPLOY_LINE = /(production|preview|deployed|deployment|aliased|ready|live|prod)\b/i
+const DEPLOY_LINE = /^\s*(?:[>✓✔✅🔗\-*•]\s*)*(?:production|preview|deployed(?: to)?|aliased|live at|deployment ready)\b[^:]*:?\s*https?:\/\//i
 const DEPLOY_HOST = /\.(vercel\.app|netlify\.app|pages\.dev|fly\.dev|onrender\.com|up\.railway\.app|herokuapp\.com)\b/
 
 let links = [] // { url, alive }
