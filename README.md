@@ -16,6 +16,7 @@ Each mod installs on its own. Pick the ones you want.
 | [**session-links**](plugins/session-links) | Collects local dev servers (`http://localhost:5173`) and deploy URLs (Vercel, Netlify, Cloudflare Pages, Fly, Render, Railway, Heroku, or any URL on a line that reads like a deploy log) seen during the session. |
 | [**paid-api-meter**](plugins/paid-api-meter) | Counts calls to paid generation APIs made through MCP tools or `curl`: fal, ElevenLabs, HeyGen, Replicate, OpenAI, Runway, Veo, Suno, Stability, Luma, Kling and more. |
 | [**done-notify**](plugins/done-notify) | A desktop notification when a turn that took at least 15 seconds ends. |
+| [**inline-images**](plugins/inline-images) | Images drawn right in the terminal: Claude gets a `show_image` tool, and pasted images and images Claude reads show up in the transcript. Works in Ghostty, kitty and Orca, with a half-block fallback elsewhere. |
 
 ## Install
 
@@ -28,11 +29,11 @@ In Claude Code (2.1.287 or later):
 
 Repeat the second line for each mod you want, then `/reload-plugins`. To get updates on their own: `/plugin` → **Marketplaces** → **encore-mods** → **Enable auto-update**.
 
-All six at once, from your shell:
+All seven at once, from your shell:
 
 ```bash
 claude plugin marketplace add benjaminb10/encore-mods
-for m in next-prompts trash-guard turn-progress session-links paid-api-meter done-notify; do
+for m in next-prompts trash-guard turn-progress session-links paid-api-meter done-notify inline-images; do
   claude plugin install "$m@encore-mods" --scope user
 done
 ```
@@ -49,6 +50,7 @@ Mods run inside Claude Code with your permissions, so here is everything these o
 | session-links | Tool output and replies (finds URLs), `HEAD` requests to your **local** servers, `open` to launch your browser |
 | paid-api-meter | Tool calls and their results (counts paid ones), for display only |
 | done-notify | Claude's last reply, runs `terminal-notifier`, `osascript` or `notify-send` |
+| inline-images | Image files you ask it to show, paste or that Claude reads; runs `sips`, ImageMagick or ffmpeg and copies images into your temp folder |
 
 No mod sends anything over the network, apart from session-links checking your own localhost servers.
 

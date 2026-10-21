@@ -36,6 +36,11 @@
       "name": "done-notify",
       "source": "./plugins/done-notify",
       "description": "A desktop notification when a long turn ends, telling you whether Claude is done or waiting for you"
+    },
+    {
+      "name": "inline-images",
+      "source": "./plugins/inline-images",
+      "description": "Shows images inline in the terminal: a show_image tool for Claude, plus pasted images and images Claude reads, Orca included"
     }
   ]
 }
