@@ -26,6 +26,18 @@ export function extractLinks(text, fromTool) {
   return found
 }
 
+// Only output of a command that starts a local server, or deploys, gives links. A URL that merely
+// shows up in a file, a log or a history Claude read does not count.
+const SERVER_CMD = /\b(npm|pnpm|yarn|bun)\s+(run\s+)?(dev|start|preview|serve)\b|\bvite\b|\bnext\s+(dev|start)\b|\bexpo\s+start\b|\bastro\s+dev\b|\b(wrangler|vercel|netlify)\s+dev\b|\bhttp\.server\b|\bserve\s|\buvicorn\b|\bflask\s+run\b|\bhugo\s+server\b|\brails\s+s(erver)?\b|\bphp\s+-S\b/
+const DEPLOY_CMD = /\bvercel\s+(deploy|--prod|-p)\b|\bvercel\s*($|[;&|])|\bnetlify\s+deploy\b|\bwrangler\s+(pages\s+)?deploy\b|\bfly\s+deploy\b|\bfirebase\s+deploy\b|\brailway\s+up\b/m
+
+export function linksFromCommand(command, output, background) {
+  const cmd = String(command || '')
+  const isServer = background || SERVER_CMD.test(cmd), isDeploy = DEPLOY_CMD.test(cmd)
+  if (!isServer && !isDeploy) return []
+  return extractLinks(output, true).filter((u) => (LOCAL.test(u) ? isServer : isDeploy))
+}
+
 function addLinks(urls) {
   for (const url of urls) {
     links = links.filter((l) => l.url !== url)
@@ -59,7 +71,8 @@ export function register(on) {
           const r = await $.http.fetch(l.url, { method: 'HEAD' })
           alive = r.status > 0
         } catch {}
-        if (alive !== l.alive) { l.alive = alive; changed = true }
+        if (alive) { l.fails = 0; if (!l.alive) { l.alive = true; changed = true } }
+        else if ((l.fails = (l.fails || 0) + 1) >= 2) { links = links.filter((x) => x !== l); changed = true }
       }
       if (changed) $.ui.invalidate('ui.render')
     })
@@ -68,10 +81,10 @@ export function register(on) {
 
   on('tool.call', async ($, e, next) => {
     const result = await next(e)
-    if (e.tool === 'Bash' || String(e.tool).startsWith('mcp__')) {
+    if (e.tool === 'Bash') {
       let text = ''
       try { text = JSON.stringify(result).slice(0, 200000) } catch {}
-      const urls = extractLinks(text, true)
+      const urls = linksFromCommand(e.command, text, e.run_in_background === true)
       if (urls.length) { addLinks(urls); $.ui.invalidate('ui.render') }
     }
     return result

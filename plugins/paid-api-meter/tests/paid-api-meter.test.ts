@@ -1,5 +1,5 @@
 import { expect, test } from 'claude-code/testing'
-import { build, isPaid, priceOf } from '../hooks/register.js'
+import { build, isPaid, priceOf, isFree } from '../hooks/register.js'
 
 const re = build(['fal', 'elevenlabs'], ['api.elevenlabs.io'])
 
@@ -13,4 +13,10 @@ test('paid calls', async () => {
 test('reported price', async () => {
   expect(priceOf('{"cost_usd": 0.042}')).toBe(0.042)
   expect(priceOf('no price here')).toBe(0)
+})
+
+test('free calls are not counted', async () => {
+  expect(isFree('{"cost_usd":0,"body":{}}')).toBe(true)
+  expect(isFree('{"cost_usd":0.05}')).toBe(false)
+  expect(isFree('{"images":[]}')).toBe(false)
 })

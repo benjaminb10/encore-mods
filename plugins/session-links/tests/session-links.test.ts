@@ -1,5 +1,5 @@
 import { expect, test } from 'claude-code/testing'
-import { extractLinks } from '../hooks/register.js'
+import { extractLinks, linksFromCommand } from '../hooks/register.js'
 
 test('local servers and deploys', async () => {
   expect(extractLinks('  ➜  Local:   http://localhost:5173/\n', true)).toEqual(['http://localhost:5173/'])
@@ -17,4 +17,12 @@ test('ordinary links are ignored', async () => {
   expect(extractLinks('✅  Production: https://app-x.vercel.app [12s]', true)).toEqual(['https://app-x.vercel.app'])
   expect(extractLinks('see https://docs.stripe.com/x for more', false)).toEqual([])
   expect(extractLinks('https://site-x.netlify.app', false)).toEqual([])
+})
+
+test('only servers started and deploys made in the session', async () => {
+  expect(linksFromCommand('grep -rh localhost ~/logs', 'see http://localhost:3103/pipeline', false)).toEqual([])
+  expect(linksFromCommand('vercel ls my-site', 'https://my-site-abc.vercel.app  Ready', false)).toEqual([])
+  expect(linksFromCommand('npm run dev', '  Local:   http://localhost:5173/', false)).toEqual(['http://localhost:5173/'])
+  expect(linksFromCommand('node server.js', 'listening on http://localhost:4000', true)).toEqual(['http://localhost:4000'])
+  expect(linksFromCommand('vercel --prod', 'Production: https://app-x.vercel.app [3s]', false)).toEqual(['https://app-x.vercel.app'])
 })

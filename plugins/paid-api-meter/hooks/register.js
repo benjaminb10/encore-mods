@@ -33,6 +33,10 @@ export function isPaid(e, re) {
   return re.tool.test(tool)
 }
 
+export function isFree(text) {
+  return /"cost(_usd)?"\s*:\s*0(\.0+)?[,}\s]/.test(String(text))
+}
+
 export function priceOf(text) {
   const m = String(text).match(PRICE)
   return m ? Number(m[1]) || 0 : 0
@@ -49,9 +53,11 @@ export function register(on, options = {}) {
     const paid = isPaid(e, { tool: toolRe, host: hostRe })
     const result = await next(e)
     if (paid && !result.deny && !result.isError) {
-      calls += 1
       let text = ''
       try { text = JSON.stringify(result).slice(0, 200000) } catch {}
+      // A call whose response says it cost nothing (a free endpoint, a status poll) is not a paid call
+      if (isFree(text)) return result
+      calls += 1
       cost += priceOf(text)
       $.ui.invalidate('ui.render')
     }
