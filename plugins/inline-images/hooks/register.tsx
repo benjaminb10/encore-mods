@@ -5,8 +5,8 @@ import type { Shown } from '../types'
 
 const TOOL = 'show_image'
 const FULL_NAME = 'mcp__inline-images__show_image'
-// Orca ne lit les images kitty (t=f) que dans le projet ou le dossier temporaire du Mac ($TMPDIR, pas /tmp) :
-// ailleurs il laisse un cadre vide (vu le 22/10). Toute image passe donc par ce dossier.
+// Orca only reads kitty image files from the project or the system temp folder ($TMPDIR, not /tmp) and draws an
+// empty frame for any other path, so every image goes through this folder.
 const tempDir = async ($: EngineInterface) =>
   `${((await $.env.get('TMPDIR').catch(() => undefined)) ?? '/tmp').replace(/\/+$/, '')}/claude-inline-images`
 const MAX_ROWS = 40
@@ -162,14 +162,14 @@ const describe = async ($: EngineInterface, using: Converter, path: string, colu
 const picture = async ($: EngineInterface, { Image, Raster }: Elements['terminal'], shown: Shown, available: number, key: string) => {
   const box = cellBox(shown, available)
 
-  // Orca gère le protocole kitty (ORCA_IMAGE_PROTOCOL=kitty), mais Claude Code ne dessine l'Image dans Orca
-  // qu'avec CLAUDE_CODE_FORCE_TERMINAL_IMAGES=1 (sinon il n'affiche que l'alt, vu le 16/10). Sans elle : demi-blocs.
+  // Orca speaks the kitty protocol (ORCA_IMAGE_PROTOCOL=kitty), but Claude Code only draws an Image there when
+  // CLAUDE_CODE_FORCE_TERMINAL_IMAGES=1; without it, only the alt text shows.
   if ((await $.env.get('TERM_PROGRAM')) === 'ghostty' || (await $.env.get('TERM')) === 'xterm-kitty' ||
       ((await $.env.get('ORCA_IMAGE_PROTOCOL')) === 'kitty' && (await $.env.get('CLAUDE_CODE_FORCE_TERMINAL_IMAGES')) === '1')) {
     return <Image source={{ file: shown.file, format: 'png' }} {...box} alt={shown.file} />
   }
 
-  // Orca sans le correctif d'images (PR stablyai/orca#28200) : les demi-blocs y sont illisibles, on ne dessine rien.
+  // Half blocks are unreadable in Orca, so without the flag nothing is drawn there.
   if ((await $.env.get('ORCA_IMAGE_PROTOCOL')) !== undefined) {
     return undefined
   }
