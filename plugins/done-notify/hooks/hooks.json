@@ -1,0 +1,6 @@
+{
+  "description": "done-notify hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}

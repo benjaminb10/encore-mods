@@ -1,0 +1,6 @@
+{
+  "description": "trash-guard hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}

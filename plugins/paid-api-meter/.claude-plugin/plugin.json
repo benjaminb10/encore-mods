@@ -1,0 +1,30 @@
+{
+  "name": "paid-api-meter",
+  "displayName": "Paid API meter",
+  "version": "0.1.0",
+  "description": "Counts the session's calls to paid generation APIs (image, video, voice, LLM) and adds up reported costs",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/paid-api-meter",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ],
+  "userConfig": {
+    "extra_services": {
+      "type": "string",
+      "title": "Extra MCP services",
+      "description": "Comma-separated words that mark an MCP tool as a paid API",
+      "default": ""
+    },
+    "extra_hosts": {
+      "type": "string",
+      "title": "Extra API hosts",
+      "description": "Comma-separated API hosts that mark a curl call as a paid API",
+      "default": ""
+    }
+  }
+}

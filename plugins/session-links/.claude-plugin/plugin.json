@@ -1,0 +1,16 @@
+{
+  "name": "session-links",
+  "displayName": "Session links",
+  "version": "0.1.0",
+  "description": "Local dev servers and deploy URLs from the session, one click away above the prompt, dimmed when the server is down",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/session-links",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ]
+}

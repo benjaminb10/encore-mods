@@ -1,0 +1,24 @@
+{
+  "name": "trash-guard",
+  "displayName": "Trash guard",
+  "version": "0.1.0",
+  "description": "Claude never deletes for good: rm, git clean and find -delete are refused outside temp folders, and Claude uses the Trash instead",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/trash-guard",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ],
+  "userConfig": {
+    "allowed_paths": {
+      "type": "string",
+      "title": "Extra allowed paths",
+      "description": "Comma-separated absolute folders where rm stays allowed, besides /tmp and /var/folders",
+      "default": ""
+    }
+  }
+}

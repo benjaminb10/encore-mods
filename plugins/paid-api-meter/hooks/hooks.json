@@ -1,0 +1,6 @@
+{
+  "description": "paid-api-meter hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}

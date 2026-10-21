@@ -1,0 +1,6 @@
+{
+  "description": "turn-progress hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}

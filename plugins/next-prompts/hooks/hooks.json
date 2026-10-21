@@ -1,0 +1,6 @@
+{
+  "description": "next-prompts hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}

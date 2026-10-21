@@ -1,0 +1,6 @@
+{
+  "description": "session-links hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}

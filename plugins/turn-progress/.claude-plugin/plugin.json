@@ -1,0 +1,16 @@
+{
+  "name": "turn-progress",
+  "displayName": "Turn progress",
+  "version": "0.1.0",
+  "description": "While Claude works: elapsed time, actions, the current step, todo progress and running subagents above the prompt",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/turn-progress",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ]
+}

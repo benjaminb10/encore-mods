@@ -1,0 +1,41 @@
+{
+  "name": "encore-mods",
+  "owner": {
+    "name": "Benjamin Benoudis"
+  },
+  "metadata": {
+    "description": "Small Claude Code mods that make long sessions easier"
+  },
+  "plugins": [
+    {
+      "name": "next-prompts",
+      "source": "./plugins/next-prompts",
+      "description": "Clickable follow-up prompts above the input: click one to put it in the prompt box, unsent"
+    },
+    {
+      "name": "trash-guard",
+      "source": "./plugins/trash-guard",
+      "description": "Claude never deletes for good: rm, git clean and find -delete are refused outside temp folders, and Claude uses the Trash instead"
+    },
+    {
+      "name": "turn-progress",
+      "source": "./plugins/turn-progress",
+      "description": "While Claude works: elapsed time, actions, the current step, todo progress and running subagents above the prompt"
+    },
+    {
+      "name": "session-links",
+      "source": "./plugins/session-links",
+      "description": "Local dev servers and deploy URLs from the session, one click away above the prompt, dimmed when the server is down"
+    },
+    {
+      "name": "paid-api-meter",
+      "source": "./plugins/paid-api-meter",
+      "description": "Counts the session's calls to paid generation APIs (image, video, voice, LLM) and adds up reported costs"
+    },
+    {
+      "name": "done-notify",
+      "source": "./plugins/done-notify",
+      "description": "A desktop notification when a long turn ends, telling you whether Claude is done or waiting for you"
+    }
+  ]
+}

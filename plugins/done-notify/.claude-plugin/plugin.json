@@ -1,0 +1,24 @@
+{
+  "name": "done-notify",
+  "displayName": "Done notify",
+  "version": "0.1.0",
+  "description": "A desktop notification when a long turn ends, telling you whether Claude is done or waiting for you",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/done-notify",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ],
+  "userConfig": {
+    "min_seconds": {
+      "type": "number",
+      "title": "Minimum turn length (seconds)",
+      "description": "Only notify for turns that took at least this long",
+      "default": 15
+    }
+  }
+}

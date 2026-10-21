@@ -1,0 +1,24 @@
+{
+  "name": "next-prompts",
+  "displayName": "Next prompts",
+  "version": "0.1.0",
+  "description": "Clickable follow-up prompts above the input: click one to put it in the prompt box, unsent",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/next-prompts",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ],
+  "userConfig": {
+    "heading": {
+      "type": "string",
+      "title": "Extra heading",
+      "description": "Another heading that introduces Claude's suggested follow-ups, besides 'Next steps' and its translations",
+      "default": ""
+    }
+  }
+}
