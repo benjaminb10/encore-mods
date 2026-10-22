@@ -139,7 +139,7 @@ export const register: Register = on => {
       <Box flexDirection="column">
         {shown.map(p => (
           <Box key={`paste-${p.id}`}>
-            <Button key={`view-${p.id}`} label={open === p.id ? 'Hide' : 'View'} onPress={() => toggle($, p.id)} />
+            <Button key={`view-${p.id}`} label={open === p.id ? 'Hide' : 'View'} hotkey="v" onPress={() => toggle($, p.id)} />
             <Text dimColor wrap="truncate-end">
               {' '}Pasted text #{p.id} · {p.lines} lines · “{preview(p.text, 60)}”
             </Text>

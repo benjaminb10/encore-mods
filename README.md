@@ -19,6 +19,10 @@ Each mod installs on its own. Pick the ones you want.
 | [**inline-images**](plugins/inline-images) | Images drawn right in the terminal: Claude gets a `show_image` tool, and pasted images and images Claude reads show up in the transcript. Works in Ghostty, kitty and Orca, with a half-block fallback elsewhere. |
 | [**paste-peek**](plugins/paste-peek) | Read a long paste before sending it: a **View** button above the prompt for each `[Pasted text #n +26 lines]` placeholder opens the whole text in a pane. |
 
+![paste-peek: View opens a long paste in full before sending it](docs/paste-peek.gif)
+
+*`paste-peek`: the paste folds into `[Pasted text #1 +21 lines]`, **View** shows the whole text, **Hide** closes it.*
+
 ## Install
 
 In Claude Code (2.1.287 or later):
