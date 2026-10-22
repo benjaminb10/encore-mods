@@ -41,6 +41,11 @@
       "name": "inline-images",
       "source": "./plugins/inline-images",
       "description": "Shows images inline in the terminal: a show_image tool for Claude, plus pasted images and images Claude reads, Orca included"
+    },
+    {
+      "name": "paste-peek",
+      "source": "./plugins/paste-peek",
+      "description": "Read a long paste before you send it: a View button above the prompt for each [Pasted text #n] placeholder opens the whole text"
     }
   ]
 }

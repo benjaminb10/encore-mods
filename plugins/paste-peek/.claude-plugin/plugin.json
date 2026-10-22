@@ -1,0 +1,18 @@
+{
+  "name": "paste-peek",
+  "displayName": "Paste peek",
+  "version": "0.1.0",
+  "description": "Read a long paste before you send it: a View button above the prompt for each [Pasted text #n] placeholder opens the whole text",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/paste-peek",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod",
+    "paste"
+  ],
+  "types": "./types/index.d.ts"
+}

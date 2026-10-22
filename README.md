@@ -1,6 +1,6 @@
 # Encore Mods
 
-Small [Claude Code mods](https://code.claude.com/docs/en/plugins/mods/overview) that make long sessions easier: clickable follow-up prompts, a guard against permanent deletes, live progress, your local and deploy URLs at hand, a paid-API counter and a notification when Claude is done.
+Small [Claude Code mods](https://code.claude.com/docs/en/plugins/mods/overview) that make long sessions easier: clickable follow-up prompts, a guard against permanent deletes, live progress, your local and deploy URLs at hand, a paid-API counter, a notification when Claude is done and a way to read a long paste before sending it.
 
 ![Encore Mods in a Claude Code session: live progress while Claude works, trash-guard refusing rm -rf, clickable follow-up prompts and a localhost link above the prompt](docs/demo.gif)
 
@@ -17,6 +17,7 @@ Each mod installs on its own. Pick the ones you want.
 | [**paid-api-meter**](plugins/paid-api-meter) | Counts calls to paid generation APIs made through MCP tools or `curl`: fal, ElevenLabs, HeyGen, Replicate, OpenAI, Runway, Veo, Suno, Stability, Luma, Kling and more. |
 | [**done-notify**](plugins/done-notify) | A desktop notification when a turn that took at least 15 seconds ends. |
 | [**inline-images**](plugins/inline-images) | Images drawn right in the terminal: Claude gets a `show_image` tool, and pasted images and images Claude reads show up in the transcript. Works in Ghostty, kitty and Orca, with a half-block fallback elsewhere. |
+| [**paste-peek**](plugins/paste-peek) | Read a long paste before sending it: a **View** button above the prompt for each `[Pasted text #n +26 lines]` placeholder opens the whole text in a pane. |
 
 ## Install
 
@@ -29,11 +30,11 @@ In Claude Code (2.1.287 or later):
 
 Repeat the second line for each mod you want, then `/reload-plugins`. To get updates on their own: `/plugin` → **Marketplaces** → **encore-mods** → **Enable auto-update**.
 
-All seven at once, from your shell:
+All eight at once, from your shell:
 
 ```bash
 claude plugin marketplace add benjaminb10/encore-mods
-for m in next-prompts trash-guard turn-progress session-links paid-api-meter done-notify inline-images; do
+for m in next-prompts trash-guard turn-progress session-links paid-api-meter done-notify inline-images paste-peek; do
   claude plugin install "$m@encore-mods" --scope user
 done
 ```
