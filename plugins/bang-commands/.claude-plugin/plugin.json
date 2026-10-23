@@ -1,0 +1,16 @@
+{
+  "name": "bang-commands",
+  "displayName": "Bang commands",
+  "version": "0.1.0",
+  "description": "When Claude asks you to run `! command` yourself, click the command: it lands in the prompt in real bash mode, press Enter",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/bang-commands",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ]
+}

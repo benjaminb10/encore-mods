@@ -46,6 +46,11 @@
       "name": "paste-peek",
       "source": "./plugins/paste-peek",
       "description": "Read a long paste before you send it: a View button above the prompt for each [Pasted text #n] placeholder opens the whole text"
+    },
+    {
+      "name": "bang-commands",
+      "source": "./plugins/bang-commands",
+      "description": "When Claude asks you to run `! command` yourself, click the command: it lands in the prompt in real bash mode, press Enter"
     }
   ]
 }

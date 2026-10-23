@@ -1,0 +1,6 @@
+{
+  "description": "bang-commands hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}

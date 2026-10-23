@@ -1,6 +1,6 @@
 # Encore Mods
 
-Small [Claude Code mods](https://code.claude.com/docs/en/plugins/mods/overview) that make long sessions easier: clickable follow-up prompts, a guard against permanent deletes, live progress, your local and deploy URLs at hand, a paid-API counter, a notification when Claude is done and a way to read a long paste before sending it.
+Small [Claude Code mods](https://code.claude.com/docs/en/plugins/mods/overview) that make long sessions easier: clickable follow-up prompts, a guard against permanent deletes, live progress, your local and deploy URLs at hand, a paid-API counter, a notification when Claude is done, a way to read a long paste before sending it and one-click `! commands`.
 
 ![Encore Mods in a Claude Code session: live progress while Claude works, trash-guard refusing rm -rf, clickable follow-up prompts and a localhost link above the prompt](docs/demo.gif)
 
@@ -18,6 +18,7 @@ Each mod installs on its own. Pick the ones you want.
 | [**done-notify**](plugins/done-notify) | A desktop notification when a turn that took at least 15 seconds ends. |
 | [**inline-images**](plugins/inline-images) | Images drawn right in the terminal: Claude gets a `show_image` tool, and pasted images and images Claude reads show up in the transcript. Works in Ghostty, kitty and Orca, with a half-block fallback elsewhere. |
 | [**paste-peek**](plugins/paste-peek) | Read a long paste before sending it: a **View** button above the prompt for each `[Pasted text #n +26 lines]` placeholder opens the whole text in a pane. |
+| [**bang-commands**](plugins/bang-commands) | When Claude asks you to run `! command` yourself, the command becomes a button: one click puts it in the prompt in Claude Code's real bash mode, then press Enter. |
 
 ![paste-peek: View opens a long paste in full before sending it](docs/paste-peek.gif)
 
@@ -34,11 +35,11 @@ In Claude Code (2.1.287 or later):
 
 Repeat the second line for each mod you want, then `/reload-plugins`. To get updates on their own: `/plugin` → **Marketplaces** → **encore-mods** → **Enable auto-update**.
 
-All eight at once, from your shell:
+All nine at once, from your shell:
 
 ```bash
 claude plugin marketplace add benjaminb10/encore-mods
-for m in next-prompts trash-guard turn-progress session-links paid-api-meter done-notify inline-images paste-peek; do
+for m in next-prompts trash-guard turn-progress session-links paid-api-meter done-notify inline-images paste-peek bang-commands; do
   claude plugin install "$m@encore-mods" --scope user
 done
 ```
@@ -56,6 +57,7 @@ Mods run inside Claude Code with your permissions, so here is everything these o
 | paid-api-meter | Tool calls and their results (counts paid ones), for display only |
 | done-notify | Claude's last reply, runs `terminal-notifier`, `osascript` or `notify-send` |
 | inline-images | Image files you ask it to show, paste or that Claude reads; runs `sips`, ImageMagick or ffmpeg and copies images into your temp folder |
+| bang-commands | Claude's replies (finds `! command`s), your prompt box; on a click runs `osascript` to type `!`; on Enter, without bash mode, runs only a command Claude asked for, in the session's folder |
 
 No mod sends anything over the network, apart from session-links checking your own localhost servers.
 
