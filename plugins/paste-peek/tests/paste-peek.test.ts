@@ -1,6 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 
-import { fits, placeholders, preview } from '../hooks/register'
+import { fits, placeholders, preview, unfold } from '../hooks/register'
 
 test('reads the placeholders Claude Code folds pastes into', () => {
   expect(placeholders('test : [Pasted text #144 +19 lines]')).toEqual([{ id: 144, extra: 19 }])
@@ -19,4 +19,11 @@ test('keeps a clipboard text only when its lines match the placeholder', () => {
 test('previews the first line that says something, cut short', () => {
   expect(preview('\n\n  Here is the spec to review\nmore')).toBe('Here is the spec to review')
   expect(preview('x'.repeat(80), 10)).toBe('xxxxxxxxx…')
+})
+
+test('Edit swaps one placeholder for its whole text, leaving the rest of the prompt alone', () => {
+  const prompt = 'Corrige ça : [Pasted text #3 +2 lines] et [Pasted text #4 +9 lines] merci'
+  expect(unfold(prompt, 3, 'ligne 1\nligne 2\nligne 3')).toBe('Corrige ça : ligne 1\nligne 2\nligne 3 et [Pasted text #4 +9 lines] merci')
+  expect(unfold('[Pasted text #7]', 7, 'a $& b')).toBe('a $& b')
+  expect(unfold('rien ici', 3, 'x')).toBe('rien ici')
 })

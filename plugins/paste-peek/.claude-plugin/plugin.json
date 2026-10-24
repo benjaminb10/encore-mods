@@ -1,8 +1,8 @@
 {
   "name": "paste-peek",
   "displayName": "Paste peek",
-  "version": "0.1.0",
-  "description": "Read a long paste before you send it: a View button above the prompt for each [Pasted text #n] placeholder opens the whole text",
+  "version": "0.2.0",
+  "description": "Read and fix a long paste before you send it: Edit unfolds a [Pasted text #n] placeholder back into the prompt, View opens it in a pane",
   "author": {
     "name": "Benjamin Benoudis"
   },

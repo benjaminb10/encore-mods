@@ -45,7 +45,7 @@
     {
       "name": "paste-peek",
       "source": "./plugins/paste-peek",
-      "description": "Read a long paste before you send it: a View button above the prompt for each [Pasted text #n] placeholder opens the whole text"
+      "description": "Read and fix a long paste before you send it: Edit unfolds a [Pasted text #n] placeholder back into the prompt, View opens it in a pane"
     },
     {
       "name": "bang-commands",

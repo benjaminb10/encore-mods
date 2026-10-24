@@ -2,7 +2,8 @@
 // plugins no way to read what's behind it before the prompt is sent (the paste doesn't even raise `prompt.edit`).
 // So when a new placeholder shows up in the box, this reads the clipboard (pbpaste, wl-paste or xclip), which still holds what was
 // just pasted, and keeps it only if its line count matches the placeholder's. A quiet row above the prompt then
-// offers View for each placeholder still in the box, opening the whole text in a pane (the arrows scroll it).
+// offers Edit and View for each placeholder still in the box: Edit puts the whole text back in the prompt box in
+// place of its placeholder, to fix before sending; View opens it in a pane (the arrows scroll it).
 // Sending the prompt clears it all.
 import { atom, read, update } from 'claude-code'
 import type { EngineInterface, Register } from 'claude-code'
@@ -64,6 +65,26 @@ async function watch($: EngineInterface, text: string) {
 async function show($: EngineInterface, id: number) {
   await update($, viewing, () => id)
   await $.ui.open({ id: PANE, title: `Pasted text #${id}`, closeOnEscape: true })
+}
+
+/** The prompt with one placeholder swapped for its whole text. */
+export function unfold(prompt: string, id: number, text: string): string {
+  return prompt.replace(new RegExp(`\\[Pasted text #${id}(?: \\+\\d+ lines?)?\\]`), () => text)
+}
+
+/** Edit: the whole pasted text goes back in the prompt box in place of its placeholder, to fix before sending. */
+async function edit($: EngineInterface, id: number) {
+  const paste = (await read($, pastes)).find(p => p.id === id)
+  if (!paste) return
+  const now = await $.prompt.read()
+  const text = unfold(now.text, id, paste.text)
+  if (text === now.text) return
+  if ((await read($, viewing)) === id) {
+    await update($, viewing, () => null)
+    await $.ui.close({ id: PANE }).catch(() => undefined)
+  }
+  await $.prompt.fill({ text, mode: 'replace' })
+  await update($, box, () => text)
 }
 
 /** View or Hide: the same button opens the text and closes it again. */
@@ -139,6 +160,8 @@ export const register: Register = on => {
       <Box flexDirection="column">
         {shown.map(p => (
           <Box key={`paste-${p.id}`}>
+            <Button key={`edit-${p.id}`} label="Edit" hotkey="e" onPress={() => edit($, p.id)} />
+            <Text> </Text>
             <Button key={`view-${p.id}`} label={open === p.id ? 'Hide' : 'View'} hotkey="v" onPress={() => toggle($, p.id)} />
             <Text dimColor wrap="truncate-end">
               {' '}Pasted text #{p.id} · {p.lines} lines · “{preview(p.text, 60)}”

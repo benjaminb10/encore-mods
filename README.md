@@ -17,7 +17,7 @@ Each mod installs on its own. Pick the ones you want.
 | [**paid-api-meter**](plugins/paid-api-meter) | Counts calls to paid generation APIs made through MCP tools or `curl`: fal, ElevenLabs, HeyGen, Replicate, OpenAI, Runway, Veo, Suno, Stability, Luma, Kling and more. |
 | [**done-notify**](plugins/done-notify) | A desktop notification when a turn that took at least 15 seconds ends. |
 | [**inline-images**](plugins/inline-images) | Images drawn right in the terminal: Claude gets a `show_image` tool, and pasted images and images Claude reads show up in the transcript. Works in Ghostty, kitty and Orca, with a half-block fallback elsewhere. |
-| [**paste-peek**](plugins/paste-peek) | Read a long paste before sending it: a **View** button above the prompt for each `[Pasted text #n +26 lines]` placeholder opens the whole text in a pane. |
+| [**paste-peek**](plugins/paste-peek) | Read and fix a long paste before sending it: above the prompt, for each `[Pasted text #n +26 lines]` placeholder, **Edit** unfolds the whole text back into the prompt box and **View** opens it in a pane. |
 | [**bang-commands**](plugins/bang-commands) | When Claude asks you to run `! command` yourself, the command becomes a button: one click puts it in the prompt in Claude Code's real bash mode, then press Enter. |
 
 ![paste-peek: View opens a long paste in full before sending it](docs/paste-peek.gif)
