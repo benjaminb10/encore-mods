@@ -1,0 +1,16 @@
+{
+  "name": "prompt-select",
+  "displayName": "Prompt select (experimental)",
+  "version": "0.1.0",
+  "description": "Experimental, macOS + Hammerspoon: Cmd+A selects your prompt (painted like a mouse selection), then Delete clears it, Cmd+C copies it, typing replaces it",
+  "author": {
+    "name": "Benjamin Benoudis"
+  },
+  "homepage": "https://github.com/benjaminb10/encore-mods/tree/main/plugins/prompt-select",
+  "repository": "https://github.com/benjaminb10/encore-mods",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "mod"
+  ]
+}

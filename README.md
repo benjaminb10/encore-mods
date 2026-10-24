@@ -18,6 +18,7 @@ Each mod installs on its own. Pick the ones you want.
 | [**done-notify**](plugins/done-notify) | A desktop notification when a turn that took at least 15 seconds ends. |
 | [**inline-images**](plugins/inline-images) | Images drawn right in the terminal: Claude gets a `show_image` tool, and pasted images and images Claude reads show up in the transcript. Works in Ghostty, kitty and Orca, with a half-block fallback elsewhere. |
 | [**paste-peek**](plugins/paste-peek) | Read and fix a long paste before sending it: above the prompt, for each `[Pasted text #n +26 lines]` placeholder, **Edit** unfolds the whole text back into the prompt box and **View** opens it in a pane. |
+| [**prompt-select**](plugins/prompt-select) *(experimental, macOS + Hammerspoon)* | **Cmd+A** selects your prompt, painted like a mouse selection: then Delete clears it, Cmd+C copies it, typing replaces it. Needs a small Hammerspoon script, and the Orca terminal for now. |
 | [**bang-commands**](plugins/bang-commands) | When Claude asks you to run `! command` yourself, the command becomes a button: one click puts it in the prompt in Claude Code's real bash mode, then press Enter. |
 
 ![paste-peek: View opens a long paste in full before sending it](docs/paste-peek.gif)
@@ -57,6 +58,7 @@ Mods run inside Claude Code with your permissions, so here is everything these o
 | paid-api-meter | Tool calls and their results (counts paid ones), for display only |
 | done-notify | Claude's last reply, runs `terminal-notifier`, `osascript` or `notify-send` |
 | inline-images | Image files you ask it to show, paste or that Claude reads; runs `sips`, ImageMagick or ffmpeg and copies images into your temp folder |
+| prompt-select | Your prompt's text (written to `~/Library/Caches/prompt-select` on your Mac), your prompt box (paints it); its Hammerspoon script reads your keys while Orca's terminal has focus |
 | bang-commands | Claude's replies (finds `! command`s), your prompt box; on a click runs `osascript` to type `!`; on Enter, without bash mode, runs only a command Claude asked for, in the session's folder |
 
 No mod sends anything over the network, apart from session-links checking your own localhost servers.

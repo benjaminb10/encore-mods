@@ -51,6 +51,11 @@
       "name": "bang-commands",
       "source": "./plugins/bang-commands",
       "description": "When Claude asks you to run `! command` yourself, click the command: it lands in the prompt in real bash mode, press Enter"
+    },
+    {
+      "name": "prompt-select",
+      "source": "./plugins/prompt-select",
+      "description": "Experimental, macOS + Hammerspoon: Cmd+A selects your prompt, then Delete clears it, Cmd+C copies it, typing replaces it"
     }
   ]
 }

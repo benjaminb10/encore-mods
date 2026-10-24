@@ -1,0 +1,6 @@
+{
+  "description": "prompt-select hooks module",
+  "modules": [
+    "./register.js"
+  ]
+}
